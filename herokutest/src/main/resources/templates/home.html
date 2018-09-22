@@ -1,9 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Home</title>
 </head>
 <body>
-	<h4>Heroku Test Page</h4>
+	<h4>
+		Heroku Test Page <span th:text="${testKey}"></span>
+	</h4>
 </body>
 </html>
