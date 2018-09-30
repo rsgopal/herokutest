@@ -19,8 +19,10 @@ public class LoginController {
 
 	@RequestMapping(value = CallbackController.LOGIN_PATH, method = RequestMethod.GET)
 	protected String login(final HttpServletRequest req) {
-		String redirectUri = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/callback";
-		String authorizeUrl = controller.buildAuthorizeUrl(req, redirectUri)
+		StringBuffer requestURL = req.getRequestURL();
+		StringBuffer redirectUrl = requestURL
+				.delete(requestURL.length() - req.getRequestURI().length(), requestURL.length()).append("/callback");
+		String authorizeUrl = controller.buildAuthorizeUrl(req, redirectUrl.toString())
 				.withAudience(String.format("https://%s/userinfo", appConfig.getDomain())).build();
 		return "redirect:" + authorizeUrl;
 	}
