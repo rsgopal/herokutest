@@ -49,6 +49,7 @@ public class CallbackController {
 			res.sendRedirect("/");
 		} catch (AuthenticationException | IdentityVerificationException e) {
 			System.out.println("Authentication failed. " + e.getClass() + "; " + e.getMessage());
+			e.printStackTrace();
 			SecurityContextHolder.clearContext();
 			res.sendRedirect(LOGIN_PATH);
 		}
